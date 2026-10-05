@@ -33,6 +33,10 @@ npm run test:coverage
 
 Независимо от этого любой коммит (в том числе из VS Code) проходит husky-хук `.husky/pre-commit`: `lint`, `lint:arch`, `tsc --noEmit`. Пропустить хук — `git commit --no-verify`.
 
+## Деплой
+
+Push в `main` → `.github/workflows/deploy.yml`: lint, lint:arch, тесты, сборка и публикация на GitHub Pages (`https://skondor.github.io/ozon-test-task/`). Статический экспорт (`output: 'export'`, `basePath`) включается в `next.config.mjs` только при заданной `PAGES_BASE_PATH`, поэтому код должен оставаться совместимым со static export: без route handlers, server actions, `cookies()`/`headers()` и т. п. Для `next/image` с локальным `src` добавляй префикс `basePath` вручную.
+
 ## Дизайн-идеи
 
 Если пользователь просит сгенерировать дизайн или попробовать варианты дизайна — создавай самостоятельные HTML-файлы в `design-ideas/NN/`, где `NN` — следующий свободный двузначный номер (`01`, `02`, `03`, …). Каждый новый запрос — новая папка; существующие не перезаписывай. Код приложения в `src/` при этом не трогай, пока пользователь не выберет вариант и не попросит его внедрить.
