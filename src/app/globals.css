@@ -1,3 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Сканируем только src (без design-ideas и прочего). hover в v4 и так срабатывает лишь на устройствах с hover */
+@import 'tailwindcss' source('..');

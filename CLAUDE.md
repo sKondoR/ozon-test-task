@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Тестовое задание на Next.js 16 (App Router, Turbopack) + React 19 + TypeScript strict + Tailwind 3. Серверные данные на клиенте — через `@tanstack/react-query`, запросы — нативным `fetch` (axios в проекте намеренно нет).
+Тестовое задание на Next.js 16 (App Router, Turbopack) + React 19 + TypeScript strict + Tailwind 4. Серверные данные на клиенте — через `@tanstack/react-query`, запросы — нативным `fetch` (axios в проекте намеренно нет).
 
 ## Команды
 
@@ -67,7 +67,7 @@ Push в `main` → `.github/workflows/deploy.yml`: lint, lint:arch, тесты, 
 ## Конфигурация
 
 - Единственный алиас — `@/*` → `src/*` (задаётся в `paths` в `tsconfig.json`, Vitest читает его через `resolve.tsconfigPaths`).
-- Tailwind сканирует `src/**/*`. ESLint ужесточает `@next/next/no-img-element` до `error` — изображения только через `next/image`.
+- Tailwind 4 настраивается в CSS (`src/app/globals.css`, директивы `@theme`/`@source`), JS-конфига нет; подключён через `@tailwindcss/postcss`. Сканируется только `src` (`source('..')` в `@import`). ESLint ужесточает `@next/next/no-img-element` до `error` — изображения только через `next/image`.
 - `tsconfig` строгий: `noUnusedLocals`, `noUnusedParameters`, `noUncheckedSideEffectImports`.
 - ESLint закреплён на 9.x: плагины внутри `eslint-config-next` пока не поддерживают ESLint 10.
 - Vitest работает в `jsdom`, но `@testing-library/react` и `@vitejs/plugin-react` не установлены — для тестов компонентов их нужно добавить.
