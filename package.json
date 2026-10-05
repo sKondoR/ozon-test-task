@@ -10,6 +10,8 @@
     "lint": "eslint . --cache",
     "lint:arch": "depcruise src --cache",
     "lint:arch:report": "depcruise src --output-type err-html --output-to dependency-report.html",
+    "format": "prettier --write . --cache",
+    "format:check": "prettier --check . --cache",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "prepare": "husky"
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@emnapi/core": "^1.11.3",
     "@emnapi/runtime": "^1.11.3",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^24.0.0",
     "@types/react": "19.3.0",
@@ -34,10 +37,14 @@
     "dependency-cruiser": "^18.5.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "16.3.8",
+    "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^17.6.0",
     "openapi-typescript": "^7.13.0",
     "postcss": "^8.5.6",
+    "prettier": "3.9.9",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3",
     "vitest": "^5.0.2"

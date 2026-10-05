@@ -1,7 +1,7 @@
 'use client'
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState, type ReactNode } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 export function Providers({ children }: { children: ReactNode }) {
   // Один QueryClient на вкладку: useState не пересоздаёт его при ререндере

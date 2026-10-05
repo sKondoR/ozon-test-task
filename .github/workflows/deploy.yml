@@ -70,6 +70,7 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run format:check
       - run: npm run lint
       - run: npm run lint:arch
       - run: npx vitest run --passWithNoTests

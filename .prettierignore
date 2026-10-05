@@ -1,0 +1,5 @@
+# Остальное (.next, out, coverage, …) Prettier берёт из .gitignore
+package-lock.json
+
+# Самостоятельные HTML-прототипы дизайна
+design-ideas

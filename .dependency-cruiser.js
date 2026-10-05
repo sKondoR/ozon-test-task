@@ -37,7 +37,10 @@ module.exports = {
       comment: 'Слайс импортируется извне только через публичный API (index.ts)',
       severity: 'error',
       from: { pathNot: `^src/(${SLICED_LAYERS})/[^/]+/` },
-      to: { path: `^src/(${SLICED_LAYERS})/[^/]+/.+`, pathNot: `^src/(${SLICED_LAYERS})/[^/]+/index\\.tsx?$` },
+      to: {
+        path: `^src/(${SLICED_LAYERS})/[^/]+/.+`,
+        pathNot: `^src/(${SLICED_LAYERS})/[^/]+/index\\.tsx?$`,
+      },
     },
     {
       name: 'fsd-public-api-from-slice',
