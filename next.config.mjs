@@ -15,6 +15,7 @@ const nextConfig = {
     removeConsole: isProd && { exclude: ['error', 'warn'] },
     reactRemoveProperties: isProd,
   },
+  reactCompiler: true, // автоматическая мемоизация компонентов и хуков
   poweredByHeader: false, // не раскрываем X-Powered-By: Next.js
   experimental: {
     memoryBasedWorkersCount: true,
