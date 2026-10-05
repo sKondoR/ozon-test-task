@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
+# Деплой только при увеличении version в package.json (или вручную).
 on:
   push:
     branches: [main]
+    paths: [package.json]
   workflow_dispatch:
 
 permissions:
@@ -16,7 +18,47 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      bumped: ${{ steps.check.outputs.bumped }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - id: check
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT" = workflow_dispatch ]; then
+            echo "bumped=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          NEW=$(node -p "require('./package.json').version")
+          # Предыдущий коммит может отсутствовать (первый push, force-push) — тогда деплоим.
+          if git fetch --depth=1 origin "$BEFORE" 2>/dev/null; then
+            OLD=$(git show "$BEFORE:package.json" | node -p "JSON.parse(require('fs').readFileSync(0)).version")
+          else
+            OLD=0.0.0
+          fi
+          BUMPED=$(node -e '
+            const parse = (v) => {
+              const [core, pre] = v.split("-");
+              return { nums: core.split(".").map(Number), pre };
+            };
+            const [a, b] = process.argv.slice(1).map(parse);
+            let cmp = 0;
+            for (let i = 0; i < 3 && !cmp; i++) cmp = Math.sign(b.nums[i] - a.nums[i]);
+            // При равном ядре: релиз > пререлиз, пререлизы сравниваем строкой.
+            if (!cmp && a.pre !== b.pre) cmp = !b.pre ? 1 : !a.pre ? -1 : b.pre > a.pre ? 1 : -1;
+            console.log(cmp > 0);
+          ' "$OLD" "$NEW")
+          echo "Версия: $OLD -> $NEW, деплой: $BUMPED"
+          echo "bumped=$BUMPED" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: version
+    if: needs.version.outputs.bumped == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

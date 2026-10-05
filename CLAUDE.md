@@ -35,7 +35,7 @@ npm run test:coverage
 
 ## Деплой
 
-Push в `main` → `.github/workflows/deploy.yml`: lint, lint:arch, тесты, сборка и публикация на GitHub Pages (`https://skondor.github.io/ozon-test-task/`). Статический экспорт (`output: 'export'`, `basePath`) включается в `next.config.mjs` только при заданной `PAGES_BASE_PATH`, поэтому код должен оставаться совместимым со static export: без route handlers, server actions, `cookies()`/`headers()` и т. п. Для `next/image` с локальным `src` добавляй префикс `basePath` вручную.
+Push в `main` → `.github/workflows/deploy.yml`: lint, lint:arch, тесты, сборка и публикация на GitHub Pages (`https://skondor.github.io/ozon-test-task/`). Workflow срабатывает, только если в push изменился `package.json` и `version` в нём выросла относительно предыдущего состояния `main` (поднимать через `npm version patch|minor|major`); вручную — `workflow_dispatch` без проверки версии. Статический экспорт (`output: 'export'`, `basePath`) включается в `next.config.mjs` только при заданной `PAGES_BASE_PATH`, поэтому код должен оставаться совместимым со static export: без route handlers, server actions, `cookies()`/`headers()` и т. п. Для `next/image` с локальным `src` добавляй префикс `basePath` вручную.
 
 ## Дизайн-идеи
 
