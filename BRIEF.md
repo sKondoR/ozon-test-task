@@ -2,9 +2,23 @@
 
 ### Функциональные:
 
-- продукт:
+- продукт: игра-змейка.
+  поле - 20х10 клеток, настраиваемое. трактор - занимает 1 клетку. На поле есть объекты - деревья и пшеница - они тоже занимают 1 клетку. Пшеницу мы собираем. Приложение растягивается на 100% экрана.
 - основные пользовательские сценарии:
-- платформа:
+  трактор ездит по полю - двигается только по нажатию стрелок на клавиатуре. Пшеницу собирает - увеличивается счетчик собранной пшеницы. Когда врезается в дерево - игра останавливается, появляется сообщение Game Over
+  трактор победил когда на поле не осталось пшеницы
+- платформа: веб и мобилка. на мобильном приложении внизу по центру rhue с зоной нажатия и 4мя стрелками
+
+Спрайты поля:
+
+- https://storage.yandexcloud.net/ozon-interview/tile-grass.png
+- https://storage.yandexcloud.net/ozon-interview/tile-tree.png
+- https://storage.yandexcloud.net/ozon-interview/tile-wheat.png
+
+Трактор: https://storage.yandexcloud.net/ozon-interview/tractor.png
+Сломанный трактор: https://storage.yandexcloud.net/ozon-interview/tractor-wreck.png
+Трактор-победитель: https://storage.yandexcloud.net/ozon-interview/tractor-winner.png
+Злой трактор: https://storage.yandexcloud.net/ozon-interview/evil-tractor.png
 
 ### Нефункциональные:
 
@@ -15,30 +29,19 @@
 
 ## Сущности и основные типы
 
-type User {
-
+type Tractor {
+state: 'default' | 'winner' | 'wreck'
 }
 
-type DataItem {
-
+type GroundTile {
+state: 'grass' | 'wheet' | 'tree'
 }
 
 ## API
 
-- REST
-  пагинация?
-  real time?
-- ws
-- sse
+в данном mvp нет.
 
 ## High-level archtecture
-
-влияющая на фронт
-
-- CDN для фронта
-- CDN / Object Storage
-- API слой
-- кэширование
 
 ## Стратегии рендеринга по компонентам
 
@@ -52,6 +55,17 @@ type DataItem {
 отпимистичные обновления
 CDN, кэширование, сжатие gzip, минификация css/js, code splitting/lazy loading, сжатие изображений, формат изображений webp
 уменьшать js, тяжелые вычисления в webworker
+
+Спрайты поля:
+
+- https://storage.yandexcloud.net/ozon-interview/tile-grass.png
+- https://storage.yandexcloud.net/ozon-interview/tile-tree.png
+- https://storage.yandexcloud.net/ozon-interview/tile-wheat.png
+
+Трактор: https://storage.yandexcloud.net/ozon-interview/tractor.png
+Сломанный трактор: https://storage.yandexcloud.net/ozon-interview/tractor-wreck.png
+Трактор-победитель: https://storage.yandexcloud.net/ozon-interview/tractor-winner.png
+Злой трактор: https://storage.yandexcloud.net/ozon-interview/evil-tractor.png
 
 ## Метрики
 

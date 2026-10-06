@@ -1,2 +1,21 @@
 /* Сканируем только src (без design-ideas и прочего). hover в v4 и так срабатывает лишь на устройствах с hover */
 @import 'tailwindcss' source('..');
+
+@theme {
+  --color-field: #34501f;
+  --color-hud: #1d2914;
+  --color-wheat: #f0c75e;
+}
+
+/* Игра на весь экран: без прокрутки, «резинки» и выделения текста при долгом тапе */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  background-color: var(--color-field);
+  -webkit-tap-highlight-color: transparent;
+}

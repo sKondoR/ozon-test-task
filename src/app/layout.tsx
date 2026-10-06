@@ -1,12 +1,18 @@
 import type { ReactNode } from 'react'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 
 import { Providers } from './providers'
 
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Ozon Test Task',
+  title: 'Трактор — сбор пшеницы',
+  description: 'Соберите всю пшеницу на поле и не врежьтесь в дерево',
+}
+
+export const viewport: Viewport = {
+  themeColor: '#1d2914', // = --color-hud из globals.css
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
