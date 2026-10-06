@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Тестовое задание на Next.js 16 (App Router, Turbopack) + React 19 + TypeScript strict + Tailwind 4. Серверные данные на клиенте — через `@tanstack/react-query`, запросы — нативным `fetch` (axios в проекте намеренно нет).
+Тестовое задание на Next.js 16 (App Router, Turbopack) + React 19 + React Compiler + TypeScript strict + Tailwind 4. Серверные данные на клиенте — через `@tanstack/react-query`, запросы — нативным `fetch` (axios в проекте намеренно нет).
 
 ## Команды
 
@@ -75,7 +75,7 @@ Push в `main` → `.github/workflows/deploy.yml`: lint, lint:arch, тесты, 
 - Tailwind 4 настраивается в CSS (`src/app/globals.css`, директивы `@theme`/`@source`), JS-конфига нет; подключён через `@tailwindcss/postcss`. Сканируется только `src` (`source('..')` в `@import`). ESLint ужесточает `@next/next/no-img-element` до `error` — изображения только через `next/image`.
 - `tsconfig` строгий: `noUnusedLocals`, `noUnusedParameters`, `noUncheckedSideEffectImports`.
 - ESLint закреплён на 9.x: плагины внутри `eslint-config-next` пока не поддерживают ESLint 10.
-- Vitest работает в `jsdom`, но `@testing-library/react` и `@vitejs/plugin-react` не установлены — для тестов компонентов их нужно добавить.
+- Vitest работает в `jsdom` с `@vitejs/plugin-react`; для тестов компонентов — `@testing-library/react` и `@testing-library/user-event`. `vitest.setup.ts` подключает матчеры `@testing-library/jest-dom` и вызывает `cleanup()` после каждого теста (`globals` выключены — `test`/`expect` импортируй из `vitest`). Файл включён в `tsconfig.json`, чтобы `tsc` видел типы матчеров.
 
 Уточнение к блоку ниже (сам блок перезаписывается `next dev`, поэтому правило вынесено сюда): читай гайды в `node_modules/next/dist/docs/` не перед каждой правкой, а только когда работаешь с API, конфигом или конвенцией Next.js, в поведении которых в этой версии есть сомнения. Читай только нужный гайд, а не весь каталог.
 
